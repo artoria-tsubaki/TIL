@@ -1,3 +1,11 @@
+/*
+ * @Author: pycd 1248353039@qq.com
+ * @Date: 2022-05-19 15:13:27
+ * @LastEditors: pycd 1248353039@qq.com
+ * @LastEditTime: 2022-05-24 14:38:08
+ * @FilePath: \TIL\20220519\index.ts
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 // 理解 ts 类中的 private 和 protected
 
 class Animal {
@@ -41,7 +49,10 @@ class Person {
 }
 // Workers 可以继承
 class Workers extends Person {
-  // ...
+  constructor(name: string) {
+    super(name)
+  }
 }
 // 不能实例化 类“Person”的构造函数是受保护的，仅可在类声明中访问。
 // let john = new Person("John")
+let c = new Workers("PP")
