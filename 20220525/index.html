@@ -5,8 +5,94 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .one,.two,.three,.four {
+            width: 100px;
+            height: 100px;
+            background-color: violet;
+            margin: 100px;
+        }
+        .five, .seven {
+            width: 100px;
+            height: 100px;
+            background-color: violet;
+            float: left;
+        }
+        .six, .eight {
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+        }
+        .eight {
+            overflow: hidden;
+        }
+        .container {
+            overflow: hidden;
+        }
+
+        .parent, .parent2 {
+            border: 10px solid #c00;
+        }
+        .parent2 {
+            overflow: hidden;
+        }
+        .child, .child2 {
+            width: 100px;
+            height: 100px;
+            background-color: violet;
+            float: left;
+        }
+    </style>
 </head>
 <body>
-    <!-- BFC: 块级格式化上下文 -->
+    <!-- 
+        BFC: 块级格式化上下文
+            属于普通流，相当于一块独立的渲染区域
+            BFC 可以看做是元素的一种属性，当元素拥有了这个属性后，可以看做成一个隔离独立的容器
+            容器内的元素不会影响容器外的元素 
+        
+        触发 BFC：
+            body 根元素
+            浮动元素： float 除 none 以外的值
+            绝对相对元素 position： absolute fixed
+            display 为 inline-block table-cells flex
+            overflow 除 visible 以外的值 hidden auto scroll
+
+    -->
+    <h2>1.解决外边距重叠</h2>
+    <div class="one"></div>
+    <div class="two"></div>
+    <h4>现象：.one 盒子下外边距和.two盒子上外边距重叠，共享一个 100px</h4>
+    <h4>办法：把两个div包裹在两个不同的 container 容器中，使用 overflow: hidden 来触发 container 的 BFC</h4>
+    <div class="container">
+        <div class="three"></div>
+    </div>
+    <div class="container">
+        <div class="four"></div>
+    </div>
+
+    <hr>
+
+    <h2>2.清除浮动</h2>
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+
+    <h4 style="margin-top: 200px;">现象：子元素浮动脱离文档流导致父元素失去了高度支撑</h4>
+    <h4>办法：给父元素添加 overflow：hidden 触发父元素的 BFC</h4>
+
+    <div class="parent2">
+        <div class="child2"></div>
+    </div>
+
+    <h2>3.阻止元素呗浮动元素覆盖</h2>
+    <div class="five"></div>
+    <div class="six"></div>
+
+    <h4>现象：给一个元素添加浮动属性，覆盖了另一个元素</h4>
+    <h4>现象：触发被覆盖元素的 BFC</h4>
+
+    <div class="seven"></div>
+    <div class="eight"></div>
 </body>
 </html>
