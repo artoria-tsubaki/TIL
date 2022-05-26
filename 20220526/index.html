@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <div>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+    <div>
+        <h3></h3>
+        <h3></h3>
+        <h3></h3>
+    </div>
+    <div></div>
+    <div>
+        <a href=""></a><a href=""></a><a href=""></a><a href=""></a><a href=""></a><a href=""></a><a href=""></a><a href=""></a>
+    </div>
+    <div></div>
+    <div>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div></div>
+    <div></div>
+    <script></script>
+    <script></script>
+    <script></script>
+    <script></script>
+    <script>
+        // 1.获取所有节点和子节点
+        let doms = document.querySelectorAll("*")
+        console.log(doms);
+        let domArr = [...doms]
+        // 计算 每种 dom 节点的个数
+        const count = {}
+        for (const dom of domArr) {
+            // count[dom.tagName] = count[dom.tagName] ? ++count[dom.tagName] : 1
+            count[dom.tagName] = (count[dom.tagName] || 0) + 1
+        }
+        console.log(count);
+        // 排序取出前三名
+        const res = Object.keys(count).sort((a,b) => count[b] - count[a]).slice(0, 3)
+        console.log(res);
+
+        // 2.通过 html 获取
+        let html = document.querySelector("html")
+        const count2 = {}
+        function scan(parent) {
+            count2[parent.tagName] = (count2[parent.tagName] || 0) + 1
+            for (const el of parent.children) {
+                scan(el)
+            }
+        }
+        scan(html)
+        const res2 = Object.keys(count2).sort((a,b) => count[b] - count[a]).slice(0, 3)
+        console.log(res2);
+    </script>
+</body>
+</html>
